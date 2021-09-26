@@ -4,45 +4,13 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class DragScript : MonoBehaviour
-    
-//, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
-    //public void OnPointerDown(PointerEventData eventData)
-    //{
-    //    Debug.Log("pointer Down");
-    //}
-
-    //public void OnBeginDrag(PointerEventData eventData)
-    //{
-    //    Debug.Log("Begin Drag");
-    //}
-
-    //public void OnDrag(PointerEventData eventData)
-    //{
-    //    Debug.Log("Drag~");
-    //}
-
-    //public void OnEndDrag(PointerEventData eventData)
-    //{
-    //    Debug.Log("End Drag");
-    //}
-
-    //private RectTransform m_DraggingPlane;
-
-
-    //public void OnDrag(PointerEventData eventData)
-    //{
-    //    m_DraggingPlane.position = Input.mousePosition;
-    //    Debug.Log(">> Rect positon >> " + m_DraggingPlane.position);
-    //    Debug.Log(">> transform positon >> " + transform.position);
-    //}
-
     Vector3 _initPoint;
+
     // Start is called before the first frame update
     void Start()
     {
-        //m_DraggingPlane = transform as RectTransform;
-        Debug.Log(">> start transform positon >> " + transform.position);
+        Debug.Log(">> start gameobject >> " + gameObject);
         _initPoint = transform.position;
     }
 
@@ -52,28 +20,25 @@ public class DragScript : MonoBehaviour
         
     }
 
-    bool isDrag = false;
+    bool _isDrag = false;
     private void OnMouseDown()
     {
-        isDrag = true;
-        //Debug.Log("down");
+        _isDrag = true;
     }
     
     private void OnMouseDrag()
-    {
-        //Debug.Log("Drag >>> " + name);
-        
-        if (Input.GetMouseButton(0))
+    {        
+        if (Input.GetMouseButton(0) && _isDrag && GameManager.instance.IsGamming)
         {
             Vector2 worldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             this.transform.position = worldPoint;
             //Debug.Log(">> >> transform positon >> " + transform.position);
+            //최상위.드래그끝(자가자신);
         }
     }
     private void OnMouseUp()
     {
-        isDrag = false;
-        //Debug.Log("up");
+        _isDrag = false;
     }
 
     public void initPosition()

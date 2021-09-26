@@ -18,7 +18,7 @@ public class TopBar : MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start()
+        void Start()
     {
         loadDays();
     }
@@ -54,14 +54,13 @@ public class TopBar : MonoBehaviour
         startBtnObj.SetActive(false);
         storeBtnObj.SetActive(false);
         backBtnObj.SetActive(false);
-        
         // 일시정지버튼이 필요할까?
 
         storeSet.SetActive(false);
         cookingSet.SetActive(true);
 
         //게임메니저한테 게임 시작을 알림.
-        //ex GameManager.isPlay(ture);
+        GameManager.instance.IsGamming = true;
     }
 
     public void IncreaseDays()
